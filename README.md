@@ -18,6 +18,7 @@ Aplicație pentru încărcarea documentelor lunare necesare contabilei: bonuri, 
    cp .env.example .env.local
    ```
 3. Completează `DATABASE_URL` (Neon) și `BLOB_READ_WRITE_TOKEN` (Vercel Blob).
+   - Dacă ai conectat Neon direct din Vercel, poți folosi și `POSTGRES_URL` (aplicația acceptă ambele variante).
 4. Creează tabela în Neon rulând SQL-ul din `drizzle/0000_init.sql`.
 5. Rulează local:
    ```bash
@@ -28,3 +29,8 @@ Aplicație pentru încărcarea documentelor lunare necesare contabilei: bonuri, 
 1. Importă repo-ul în Vercel.
 2. Setează variabilele `DATABASE_URL` și `BLOB_READ_WRITE_TOKEN` în Project Settings → Environment Variables.
 3. Deploy.
+
+## Verificare conexiune Neon
+- După ce ai configurat variabilele, verifică starea conexiunii la:
+  - `GET /api/health`
+- Răspuns `200` cu `{"ok":true}` înseamnă că Neon este conectat corect.
