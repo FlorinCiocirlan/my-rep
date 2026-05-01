@@ -22,8 +22,10 @@ export async function GET(_: Request, { params }: { params: { id: string } }) {
     zip.file(doc.fileName, content);
   }));
 
-  const zipped = await zip.generateAsync({ type: "nodebuffer" });
-  return new NextResponse(zipped, {
+  const zipped = await zip.generateAsync({ type: "uint8array" });
+  const blob = new Blob([zipped], { type: "application/zip" });
+
+  return new NextResponse(blob, {
     headers: {
       "Content-Type": "application/zip",
       "Content-Disposition": `attachment; filename="${month.label}.zip"`
