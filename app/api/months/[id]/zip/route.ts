@@ -23,7 +23,8 @@ export async function GET(_: Request, { params }: { params: { id: string } }) {
   }));
 
   const zipped = await zip.generateAsync({ type: "uint8array" });
-  const blob = new Blob([zipped], { type: "application/zip" });
+  const buffer = zipped.buffer.slice(zipped.byteOffset, zipped.byteOffset + zipped.byteLength);
+  const blob = new Blob([buffer], { type: "application/zip" });
 
   return new NextResponse(blob, {
     headers: {
