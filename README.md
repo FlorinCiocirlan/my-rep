@@ -1,36 +1,18 @@
 # Dosar contabil lunar (Next.js + shadcn + Neon + Vercel)
 
-Aplicație pentru încărcarea documentelor lunare necesare contabilei: bonuri, facturi, extrase de cont și alte fișiere.
+Aplicație privată pentru încărcarea documentelor lunare necesare contabilei.
 
-## Stack
-- Next.js 14 (App Router)
-- shadcn/ui (componente UI de bază)
-- Neon Postgres + Drizzle ORM (metadate fișiere)
-- Vercel Blob (stocare fișiere)
+## Funcții
+- Conturi utilizator (register/login) pentru acces privat.
+- Pagină de upload fișiere (bonuri, facturi, extrase, etc.).
+- Pagină cu toate fișierele grupate pe lună.
+- Creare lună nouă (ex: `2026-05`).
+- Generare ZIP per lună, prin URL, pentru contabilă.
 
-## Configurare
-1. Instalează dependențele:
-   ```bash
-   npm install
-   ```
-2. Copiază variabilele de mediu:
-   ```bash
-   cp .env.example .env.local
-   ```
-3. Completează `DATABASE_URL` (Neon) și `BLOB_READ_WRITE_TOKEN` (Vercel Blob).
-   - Dacă ai conectat Neon direct din Vercel, poți folosi și `POSTGRES_URL` (aplicația acceptă ambele variante).
-4. Creează tabela în Neon rulând SQL-ul din `drizzle/0000_init.sql`.
-5. Rulează local:
-   ```bash
-   npm run dev
-   ```
+## Init DB
+Rulează SQL-ul din `drizzle/0000_init.sql` în Neon SQL Editor.
 
-## Deploy pe Vercel
-1. Importă repo-ul în Vercel.
-2. Setează variabilele `DATABASE_URL` și `BLOB_READ_WRITE_TOKEN` în Project Settings → Environment Variables.
-3. Deploy.
-
-## Verificare conexiune Neon
-- După ce ai configurat variabilele, verifică starea conexiunii la:
-  - `GET /api/health`
-- Răspuns `200` cu `{"ok":true}` înseamnă că Neon este conectat corect.
+## Variabile de mediu
+- `DATABASE_URL` sau `POSTGRES_URL`
+- `BLOB_READ_WRITE_TOKEN`
+- `AUTH_SECRET`
