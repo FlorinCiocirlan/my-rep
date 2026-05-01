@@ -22,7 +22,7 @@ export async function GET(_: Request, { params }: { params: { id: string } }) {
     zip.file(doc.fileName, content);
   }));
 
-  const zipped = await zip.generateAsync({ type: "uint8array" });
+  const zipped = await zip.generateAsync({ type: "nodebuffer" });
   return new NextResponse(zipped, {
     headers: {
       "Content-Type": "application/zip",
